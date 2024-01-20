@@ -1,40 +1,59 @@
 package com.wecp.progressive.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.wecp.progressive.dto.CustomerAccountInfo;
 import com.wecp.progressive.entity.Customers;
+//import com.wecp.progressive.entity.SortByaccount;
 
 public class CustomerDAOImpl implements CustomerDAO {
-
+   
+    ArrayList<Customers> list=new ArrayList<>();
     @Override
     public int addCustomer(Customers customers) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCustomer'");
+        list.add(customers);
+        return list.size();
     }
 
     @Override
     public Customers getCustomerById(int customerId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCustomerById'");
+        for(Customers a:list){
+            if(a.getCustomer_id()==customerId){
+              return a;
+            }
+           }
+           return null;
     }
 
     @Override
     public void updateCustomer(Customers customers) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCustomer'");
+        for(Customers a:list){
+            if(a.getCustomer_id()==customers.getCustomer_id()){
+              a.setName(customers.getName());
+              a.setEmail(customers.getEmail());
+              a.setUsername(customers.getUsername());
+              a.setPassword(customers.getPassword());
+              a.setRole(customers.getRole());
+              break;
+            }
+        }
     }
 
     @Override
     public void deleteCustomer(int customerId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteCustomer'");
+         for(Customers c:list){
+            if(c.getCustomer_id()==customerId){
+                list.remove(c);
+                break;
+            }
+         }
     }
 
     @Override
     public List<Customers> getAllCustomers() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllCustomers'");
+           return list;
     }
 
     @Override
@@ -42,5 +61,6 @@ public class CustomerDAOImpl implements CustomerDAO {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCustomerAccountInfo'");
     }
+    
 
 }

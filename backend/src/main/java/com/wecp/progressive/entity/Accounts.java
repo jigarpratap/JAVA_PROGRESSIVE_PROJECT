@@ -44,6 +44,12 @@ public class Accounts implements Comparable<Accounts> {
     }
 
 
+    @Override
+    public String toString() {
+        return "Accounts [account_id=" + account_id + ", customer_id=" + customer_id + ", balance=" + balance + "]";
+    }
+
+
 
 
 }
